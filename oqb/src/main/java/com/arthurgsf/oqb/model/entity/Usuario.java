@@ -1,11 +1,11 @@
-package com.arthurgsf.olxbarber.model.entidades;
+package com.arthurgsf.oqb.model.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Id;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,30 +13,31 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="usuario")
+@Table(
+    name="usuario"
+    )
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Usuario {
-    @Id
+    @javax.persistence.Id
     @Column(name = "id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long Id;
 
     @Column(name = "nome")
-    private String Nome;
+    private String nome;
 
-    @Column(name = "login")
-    private String Login;
+    @Column(name = "login", unique = true)
+    private String login;
 
     @Column(name = "senha")
-    private String Senha;
+    private String senha;
   
     @Column(name = "email")
-    private String Email;
+    private String email;
 
     @Column(name = "telefone")
-    private String Telefone;
+    private String telefone;
 }

@@ -1,26 +1,20 @@
-package com.arthurgsf.olxbarber.model.entidades;
-import lombok.*;
+package com.arthurgsf.oqb.model.entity;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="quadra")
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Table(name = "Quadra")
 
 public class Quadra {
     @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long Id;
+    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long Id;
 
     @Column(name = "nome")
     private String Nome;
@@ -38,9 +32,6 @@ public class Quadra {
     private String Esportes;
     
     @Column(name = "preco")
-    private Double preco;
+    private Double Preco;
 
-    @ManyToOne
-    @JoinColumn (name = "id_usuario")
-    private Usuario usuario;
 }

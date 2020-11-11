@@ -1,10 +1,10 @@
-package com.arthurgsf.olxbarber;
+package com.arthurgsf.oqb;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class OlxbarberApplicationTests {
+class OqbApplicationTests {
 
 	@Test
 	void contextLoads() {
