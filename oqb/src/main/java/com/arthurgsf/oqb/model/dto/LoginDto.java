@@ -4,13 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+
 @Data
 @Builder
 @AllArgsConstructor
-public class UsuarioDto {
-    private String nome;
-    private String login;
-    private String senha;
+public class LoginDto {
     private String email;
-    private String telefone;
+    private String senha;
 }

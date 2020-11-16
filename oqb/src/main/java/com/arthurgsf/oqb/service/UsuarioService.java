@@ -27,6 +27,20 @@ public class UsuarioService {
         return repo.save(usuario);
     }
 
+    public void deletar(String Email){
+        Optional<Usuario> usr = repo.findByEmail(Email);
+        if(!usr.isPresent())
+            throw new RuntimeException("Erro ao deletar. Usuário inexistente.");
+        
+        repo.delete(usr.get());
+    }
+
+    // só vai ter update se a gente quiser enfeitar depois
+    // public void update(Usuario usuario){
+    //     Optional<Usuario> usr = repo.findByEmail(Email);
+    //     repo.
+    // }
+
     private void validar(Usuario usuario) {
         if (usuario == null)
             throw new RuntimeException("Um usuário válido deve ser informado");                
