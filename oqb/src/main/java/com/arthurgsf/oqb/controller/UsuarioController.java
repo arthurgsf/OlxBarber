@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/usr")
 public class UsuarioController {
-    // @PostMapping
-    // public ResponseEntity
+    @PostMapping
+    public ResponseEntity 
 }
