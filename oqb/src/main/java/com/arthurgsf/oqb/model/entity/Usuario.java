@@ -23,7 +23,7 @@ public class Usuario {
     @javax.persistence.Id
     @Column(name = "id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id;
+    private Long Id;
 
     @Column(name = "nome")
     private String nome;
