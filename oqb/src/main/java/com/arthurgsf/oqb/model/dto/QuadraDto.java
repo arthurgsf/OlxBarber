@@ -1,6 +1,6 @@
 package com.arthurgsf.oqb.model.dto;
 
-import com.arthurgsf.oqb.model.entity.Usuario;
+import com.arthurgsf.oqb.model.entity.Quadra;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -15,10 +15,10 @@ import java.util.List;
 @RequestMapping("/api/quadra")
 public class QuadraController {
     @Autowired
-    QuadraService service;
+    QuadraService qdService;
 
     @PostMapping
-    public ResponseEntity salvar(@RequestBody QuadraDto dto) {
+    public ResponseEntity salvarQuadra(@RequestBody QuadraDto dto) {
 
         Quadra qd = Quadra.builder()
                 .nome(dto.getNome())
@@ -31,20 +31,29 @@ public class QuadraController {
                 .build();
 
         try {
-            Quadra quadra = service.salvar(qd);
+            Quadra quadra = qdService.salvar(qd);
             return new ResponseEntity(quadra, HttpStatus.CREATED);
         }
         catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
+    }
 
+    @DeleteMapping
+    public ResponseEntity deletarQuadra(@RequestParam String nome){
+        try{
+            qdService.deletar(nome);
+            return ResponseEntity.ok(true);
+        }catch(RuntimeException e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @GetMapping
     public ResponseEntity obterQuadras(){
 
         try{
-            List<Quadra> quadras = service.obterQuadras();
+            List<Quadra> quadras = qdService.obterQuadras();
             return new ResponseEntity(quadras, HttpStatus.OK);
         }catch(Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -56,7 +65,7 @@ public class QuadraController {
     public ResponseEntity obterQuadra(@PathVariable("id") Long idQuadra) {
         Quadra qdr = Quadra.builder().id(idQuadra).build();
         try {
-            Quadra quadra = service.obterQuadra(qdr);
+            Quadra quadra = qdService.obterQuadra(qdr);
             return new ResponseEntity(quadra, HttpStatus.OK);
         }
         catch(Exception e) {
