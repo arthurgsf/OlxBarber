@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/quadra")
 public class QuadraController {
@@ -36,6 +38,30 @@ public class QuadraController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
 
+    }
+
+    @GetMapping
+    public ResponseEntity obterQuadras(){
+
+        try{
+            List<Quadra> quadras = service.obterQuadras();
+            return new ResponseEntity(quadras, HttpStatus.OK);
+        }catch(Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity obterQuadra(@PathVariable("id") Long idQuadra) {
+        Quadra qdr = Quadra.builder().id(idQuadra).build();
+        try {
+            Quadra quadra = service.obterQuadra(qdr);
+            return new ResponseEntity(quadra, HttpStatus.OK);
+        }
+        catch(Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
 }
