@@ -1,6 +1,7 @@
 package com.arthurgsf.oqb.service;
 
 import com.arthurgsf.oqb.model.entity.Quadra;
+import com.arthurgsf.oqb.model.entity.Usuario;
 import com.arthurgsf.oqb.model.repo.QuadraRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,5 +46,13 @@ public class QuadraService {
             return quadra.get();
         else
             return null;
+    }
+
+    public void deletar(Long id) {
+        Optional<Quadra> qdr = repo.findById(id);
+        if(!qdr.isPresent())
+            throw new RuntimeException("Erro ao deletar. Quadra inexistente.");
+
+        repo.delete(qdr.get());
     }
 }

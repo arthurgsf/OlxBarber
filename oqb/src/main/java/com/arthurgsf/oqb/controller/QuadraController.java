@@ -40,9 +40,9 @@ public class QuadraController {
     }
 
     @DeleteMapping
-    public ResponseEntity deletarQuadra(@RequestParam String nome){
+    public ResponseEntity deletarQuadra(@RequestParam Long id){
         try{
-            qdService.deletar(nome);
+            qdService.deletar(id);
             return ResponseEntity.ok(true);
         }catch(RuntimeException e){
             return ResponseEntity.badRequest().body(e.getMessage());
