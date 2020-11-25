@@ -25,7 +25,7 @@ public class Quadra {
     private long Id;
 
     @Column(name = "nome")
-    private String Nome;
+    private String nome;
 
     @Column(name = "endereco")
     private String endereco;
@@ -34,12 +34,12 @@ public class Quadra {
     private String descricao;
     
     @Column(name = "email")
-    private String Email;
+    private String email;
 
     @Column(name = "esportes")
-    private String Esportes;
+    private String esportes;
     
     @Column(name = "preco")
-    private Double Preco;
+    private Double preco;
 
 }

@@ -17,7 +17,7 @@ public class QuadraService {
         return repo.save(quadra);
     }
 
-    public boolean login(String nome, String senha){
+    public boolean login(String nome){
         Optional<Quadra> quadra = repo.findByNome(nome);
         if(!quadra.isPresent())
             throw new RuntimeException("Erro de Autenticação. Nome não cadastrado.");
