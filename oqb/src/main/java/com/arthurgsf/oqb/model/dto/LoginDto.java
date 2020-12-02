@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 @Builder
 @AllArgsConstructor
-public class LoginDto {
+public class LoginDTO {
     private String email;
     private String senha;
 }

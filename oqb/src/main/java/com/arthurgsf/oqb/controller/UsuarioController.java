@@ -1,11 +1,10 @@
 package com.arthurgsf.oqb.controller;
 
-import com.arthurgsf.oqb.model.dto.LoginDto;
-import com.arthurgsf.oqb.model.dto.UsuarioDto;
+import com.arthurgsf.oqb.model.dto.LoginDTO;
+import com.arthurgsf.oqb.model.dto.UsuarioDTO;
 import com.arthurgsf.oqb.model.entity.Usuario;
 import com.arthurgsf.oqb.service.UsuarioService;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +22,7 @@ public class UsuarioController {
     UsuarioService usrService;
 
     @PostMapping
-    public ResponseEntity salvarUsuario(@RequestBody UsuarioDto dto) {
+    public ResponseEntity salvarUsuario(@RequestBody UsuarioDTO dto) {
         // builda um novo usuario a partir dos dados do DTO
         Usuario usr = Usuario.builder()
                         .nome(dto.getNome())
@@ -44,7 +43,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/autenticar")
-    public ResponseEntity autenticarUsuario(@RequestBody LoginDto dto) {
+    public ResponseEntity autenticarUsuario(@RequestBody LoginDTO dto) {
         try {
             usrService.login(dto.getEmail(), dto.getSenha());
             return ResponseEntity.ok(true);

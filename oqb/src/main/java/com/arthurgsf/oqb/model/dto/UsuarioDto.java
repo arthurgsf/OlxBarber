@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 @Builder
 @AllArgsConstructor
-public class UsuarioDto {
+public class UsuarioDTO {
     private String nome;
     private String login;
     private String senha;
