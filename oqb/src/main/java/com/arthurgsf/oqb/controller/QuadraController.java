@@ -3,7 +3,7 @@ package com.arthurgsf.oqb.controller;
 import com.arthurgsf.oqb.model.entity.Quadra;
 import com.arthurgsf.oqb.model.entity.Usuario;
 import com.arthurgsf.oqb.service.QuadraService;
-import com.arthurgsf.oqb.model.dto.QuadraDto;
+import com.arthurgsf.oqb.model.dto.QuadraDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,7 @@ public class QuadraController {
     QuadraService qdService;
 
     @PostMapping
-    public ResponseEntity salvarQuadra(@RequestBody QuadraDto dto) {
+    public ResponseEntity salvarQuadra(@RequestBody QuadraDTO dto) {
 
         Quadra qd = Quadra.builder()
                 .nome(dto.getNome())

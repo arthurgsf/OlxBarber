@@ -1,17 +1,17 @@
 package com.arthurgsf.oqb.model.dto;
 
-import com.arthurgsf.oqb.model.entity.Quadra;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
-import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Data
 @Builder
+@NoArgsConstructor
 @AllArgsConstructor
-public class QuadraDto {
+public class QuadraDTO {
 
     private String nome;
     private String endereco;
