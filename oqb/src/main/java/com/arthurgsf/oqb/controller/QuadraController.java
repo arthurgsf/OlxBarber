@@ -49,7 +49,7 @@ public class QuadraController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/todas")
     public ResponseEntity obterQuadras(){
 
         try{
@@ -58,7 +58,6 @@ public class QuadraController {
         }catch(Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }
-
     }
 
     @GetMapping("/{id}")
