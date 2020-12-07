@@ -2,7 +2,7 @@ import React from 'react'
 import DashHeader from '../components/DashHeader'
 import {withRouter} from 'react-router-dom'
 import axios from 'axios'
-import { Heading, Pane, Small, Text, TimeIcon, Button, TextInput, Autocomplete, majorScale } from 'evergreen-ui'
+import { Heading, Pane, Small, Text, TimeIcon, Button, SearchInput, Autocomplete, majorScale, Badge } from 'evergreen-ui'
 import QuadraService from '../api/QuadraService'
 
 class DashBoard extends React.Component {
@@ -12,53 +12,34 @@ class DashBoard extends React.Component {
         this.quadraService = new QuadraService();
         this.state = {
             quadras:[],
+            busca:[]
         }
 
-        this.buscar = this.buscar.bind(this);
-    }
-    
-    getQuadras = ()=>{
-        axios.get().then().catch();
+        this.busca = this.busca.bind(this);
+        this.carregarQuadras = this.carregarQuadras.bind(this);
     }
 
-    buscar(strBusca){
-        return this.state.quadras.map((q, i) => q.nome.includes(strBusca)||q.endereco.includes(strBusca));
+    busca (e) {
+        let strBusca = e.target.value;
+        this.setState({
+            quadras:this.state.quadras,
+            busca:this.state.quadras.filter((q)=> 
+                q.nome.toLowerCase().includes(strBusca.toLowerCase().trim())||
+                q.endereco.toLowerCase().includes(strBusca.toLowerCase().trim())||
+                q.esportes.toLowerCase().includes(strBusca.toLowerCase().trim())
+                )})
     }
 
     render() {
         return (
-            
+
         <Pane paddingX="5em">
-            <DashHeader></DashHeader>
+            <DashHeader onNovaQuadra={this.carregarQuadras} idUsuario={this.props.location.state}></DashHeader>
             <Pane width="100%">
                 <Pane marginX="auto" marginY={60}  alignItems="center">
-                    <Autocomplete
-                    renderItem={(q)=>(
-                        <Pane>
-                            <Text>{q.nome}</Text>
-                            <Text><Small>{q.endereco}</Small></Text>
-                            
-                        </Pane>
-                    )}
-                    items={this.state.quadras}
-                    itemsFilter={this.buscar}
-                    >
-                        {(props)=>{
-                            const { getInputProps, getRef, inputValue, openMenu } = props;
-                            return (
-                                <TextInput
-                                marginBottom={60}
-                                width="100%"
-                                placeholder="Buscar"
-                                height={majorScale(5)}
-                                value={inputValue}
-                                ref={getRef}
-                                {...getInputProps()}/> 
-                            )
-                        }}
-                    </Autocomplete>
-                    {this.state.quadras.map((q, idx)=>(    
-                        <Pane minHeight={150}maxHeight={200} padding={24} elevation={1} marginBottom={20}>
+                    <SearchInput placeholder="Buscar" width="100%" height={majorScale(6)} onChange={this.busca}/>
+                    {this.state.busca.map((q, idx)=>(
+                        <Pane minHeight={150} padding={24} elevation={1} marginY={10}>
                             <Heading>{q.nome.replace(/\w\S*/g,(txt)=> txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase())}
                             </Heading>
                             <Text>{q.descricao}</Text>
@@ -68,6 +49,13 @@ class DashBoard extends React.Component {
                             <Pane>
                                 <Text><Small>{q.endereco.replace(/\w\S*/g,(txt)=> txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase())}</Small></Text>
                             </Pane>
+                            <Pane>
+                                {q.esportes.split(',').map((e, i)=>{
+                                        return(
+                                            <Badge marginRight="2em">{e}</Badge>
+                                        )
+                                    })}
+                            </Pane>
                         </Pane>
                     ))}
                 </Pane>
@@ -76,12 +64,16 @@ class DashBoard extends React.Component {
         )
     }
 
-    componentDidMount() {
+    carregarQuadras(){
         this.quadraService.listar().then((res)=>{
-            this.setState({quadras:res.data});
+            this.setState({quadras:res.data, busca:res.data});
         }).catch((err)=>{
             console.log(err);
         });
+    }
+
+    componentDidMount() {
+        this.carregarQuadras();
     }
 }
 

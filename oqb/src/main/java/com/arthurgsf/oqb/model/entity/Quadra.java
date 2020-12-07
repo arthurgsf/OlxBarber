@@ -35,9 +35,6 @@ public class Quadra {
     @Column(name = "preco")
     private Double preco;
 
-    @Column(name = "horarios")
-    private Timestamp horarios;
-
     @OneToOne
     @JoinColumn(name = "id_usuario")
     private Usuario idUsuario;

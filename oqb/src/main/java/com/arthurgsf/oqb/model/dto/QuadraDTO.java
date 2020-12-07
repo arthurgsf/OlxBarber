@@ -18,7 +18,5 @@ public class QuadraDTO {
     private String descricao;
     private String esportes;
     private Double preco;
-    private Timestamp horarios;
     private Long idUsuario;
-
 }

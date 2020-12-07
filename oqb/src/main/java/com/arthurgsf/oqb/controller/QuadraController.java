@@ -24,8 +24,7 @@ public class QuadraController {
                 .nome(dto.getNome())
                 .descricao(dto.getDescricao())
                 .endereco(dto.getEndereco())
-                .esportes(dto.getEsportes())
-                .horarios(dto.getHorarios())
+                .esportes(dto.getEsportes())                
                 .preco(dto.getPreco())
                 .idUsuario(Usuario.builder().id(dto.getIdUsuario()).build())
                 .build();

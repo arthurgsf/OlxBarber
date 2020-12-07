@@ -13,13 +13,13 @@ public class UsuarioService {
     @Autowired
     UsuarioRepository repo;
 
-    public boolean login(String email, String senha){
+    public Usuario login(String email, String senha){
         Optional<Usuario> usr = repo.findByEmail(email);
         if(!usr.isPresent())
             throw new RuntimeException("Erro de Autenticação. E-mail não cadastrado.");
         if(!usr.get().getSenha().equals(senha))
             throw new RuntimeException("Erro de Autenticação. Senha inválida.");
-        return true;
+        return usr.get();
     }
 
     public Usuario salvar(Usuario usuario){

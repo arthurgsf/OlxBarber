@@ -45,8 +45,8 @@ public class UsuarioController {
     @PostMapping("/autenticar")
     public ResponseEntity autenticarUsuario(@RequestBody LoginDTO dto) {
         try {
-            usrService.login(dto.getEmail(), dto.getSenha());
-            return ResponseEntity.ok(true);
+            Usuario usr = usrService.login(dto.getEmail(), dto.getSenha());
+            return ResponseEntity.ok().body(usr.getId());
         } catch(RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
