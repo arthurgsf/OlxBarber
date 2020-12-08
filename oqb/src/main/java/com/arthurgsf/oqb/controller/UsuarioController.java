@@ -27,7 +27,6 @@ public class UsuarioController {
         Usuario usr = Usuario.builder()
                         .nome(dto.getNome())
                         .email(dto.getEmail())
-                        .login(dto.getLogin())
                         .senha(dto.getSenha())
                         .telefone(dto.getTelefone())
                         .build();

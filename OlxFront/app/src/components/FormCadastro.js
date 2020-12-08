@@ -1,10 +1,10 @@
 import React from 'react'
-import { Button, Heading, Pane, TextInputField, PlusIcon, Text, SelectField, Position, toaster, TextareaField } from 'evergreen-ui'
+import {withRouter} from 'react-router-dom'
+import { Button, Heading, Pane, TextInputField, PlusIcon, Text, SelectField, Position, toaster, TextareaField, majorScale } from 'evergreen-ui'
 import UsuarioService from '../api/UsuarioService'
-import { Button, Heading, Pane, TextInputField, majorScale } from 'evergreen-ui'
 
 class FormCadastro extends React.Component {
-  constructor(props){
+  	constructor(props){
 		super(props);
 		this.state = {
 			usuario:{
@@ -12,19 +12,31 @@ class FormCadastro extends React.Component {
 				email:'',
 				telefone:'',
 				senha:''
-      }
-    }
+      		},
+      		confirmarSenha:'',
+    	}
 		this.usuarioService = new UsuarioService();
 		this.cadastrarUsuario = this.cadastrarUsuario.bind(this);
-  }
+  	}
 
-  cadastrarUsuario(){
+	cadastrarUsuario(e){
+		e.preventDefault();
+		e.target.reset();
+
+		if(this.state.confirmarSenha === this.state.usuario.confirmarSenha){
+			toaster.danger("As senhas informadas não correspondem");
+			return;
+		}
+
 		this.usuarioService.post("", this.state.usuario).then((res)=>{
-			console.log(res);
-			this.props.onNovaUsuario();
-			this.props.close();
 			toaster.success("Usuário cadastrado.");
+			console.log(res.data);
+			this.props.history.push({
+				pathname:"/main", 
+				state:res.data.id,
+			});
 		}).catch((err) => {
+			console.log(err)
 			toaster.danger("Erro ao cadastrar novo usuário.");
 		});
 	}
@@ -33,7 +45,7 @@ class FormCadastro extends React.Component {
     return (
       <div>
         <Pane padding="2em">
-            <form>
+            <form onSubmit={this.cadastrarUsuario}>
                 <Heading is="h2">Mais de 1.000 quadras poliesportivas para você!</Heading>
                 <TextInputField
                 onChange={(e)=> this.state.usuario.nome = e.target.value}
@@ -62,24 +74,23 @@ class FormCadastro extends React.Component {
                 placeholder="*********"/>
 
                 <TextInputField type="password"
-                required
+				required
+				onChange={(e)=>this.state.confirmarSenha = e.target.value}
                 label="Confirme a senha:"
                 placeholder="*********"/>
-                <Button appearance="primary" intent = "success" width="100%" justifyContent="center" height= {majorScale(6)} > Cadastrar</Button>
+
+                <Button 
+                appearance="primary" 
+                intent = "success" 
+                width="100%" 
+                justifyContent="center"
+                height= {majorScale(6)} >
+                  	Cadastrar
+                </Button>
             </form>
-            <Button
-              marginTop={30}
-              justifyContent="center"
-              intent="success" 
-              appearance="primary" 
-              width="100%"
-              onClick={this.cadastrarUsuario}
-              >
-                  Cadastrar
-            </Button>
         </Pane>
       </div>
     )
   }
 }
-export default FormCadastro
+export default withRouter(FormCadastro)

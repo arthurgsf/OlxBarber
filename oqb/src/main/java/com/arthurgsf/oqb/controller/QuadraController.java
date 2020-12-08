@@ -26,7 +26,7 @@ public class QuadraController {
                 .endereco(dto.getEndereco())
                 .esportes(dto.getEsportes())                
                 .preco(dto.getPreco())
-                .idUsuario(Usuario.builder().id(dto.getIdUsuario()).build())
+                .usuario(Usuario.builder().id(dto.getIdUsuario()).build())
                 .build();
 
         try {

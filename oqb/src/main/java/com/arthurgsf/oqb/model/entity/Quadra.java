@@ -35,8 +35,7 @@ public class Quadra {
     @Column(name = "preco")
     private Double preco;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_usuario")
-    private Usuario idUsuario;
-
+    private Usuario usuario;
 }

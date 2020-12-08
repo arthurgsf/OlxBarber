@@ -28,9 +28,6 @@ public class Usuario {
     @Column(name = "nome")
     private String nome;
 
-    @Column(name = "login", unique = true)
-    private String login;
-
     @Column(name = "senha")
     private String senha;
   

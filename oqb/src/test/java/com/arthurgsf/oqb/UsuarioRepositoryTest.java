@@ -19,7 +19,7 @@ public class UsuarioRepositoryTest {
     @Test
     public void verificarSalvarUsuario(){
         //cenário
-        Usuario user = Usuario.builder().nome("Teste").login("testlogin2").telefone("98989898")
+        Usuario user = Usuario.builder().nome("Teste").telefone("98989898")
         .email("teste@teste.com")
         .senha("123").build();
 

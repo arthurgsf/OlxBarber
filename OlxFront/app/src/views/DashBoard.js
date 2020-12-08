@@ -27,7 +27,7 @@ class DashBoard extends React.Component {
                 q.nome.toLowerCase().includes(strBusca.toLowerCase().trim())||
                 q.endereco.toLowerCase().includes(strBusca.toLowerCase().trim())||
                 q.esportes.toLowerCase().includes(strBusca.toLowerCase().trim())
-                )})
+            )})
     }
 
     render() {
