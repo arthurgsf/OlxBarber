@@ -27,6 +27,11 @@ public class HorarioFuncionamentoController {
     @Autowired
     HorarioFuncionamentoService hrService;
 
+    /**
+     * Cria um horário de funcionamento relacionando um dia da semana, um horário e uma quadra
+     * @param horario
+     * @return Ok ou error
+     */
     @PostMapping
     public ResponseEntity SalvaHorarioFuncionamento(@RequestBody HorarioFuncionamentoDTO horario){
         HorarioFuncionamento horarioFuncionamento = 
@@ -43,6 +48,11 @@ public class HorarioFuncionamentoController {
         }
     }
 
+    /**
+     * Lista os horários de funcionamento de uma quadra específica
+     * @param id_quadra
+     * @return List<HorarioFuncionamento>
+     */
     @GetMapping
     public ResponseEntity ListarHorariosFuncionamento(@RequestParam int id_quadra){
         Optional<List<HorarioFuncionamento>> horariosFuncionamento = hrService.buscarPorQuadra(Quadra.builder().id(id_quadra).build());

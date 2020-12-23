@@ -17,6 +17,12 @@ public class QuadraController {
     @Autowired
     QuadraService qdService;
 
+    /**
+     * Recebe um de quadra DTO e salva no banco de dados
+     *
+     * @param dto
+     * @return ok ou error
+     */
     @PostMapping
     public ResponseEntity salvarQuadra(@RequestBody QuadraDTO dto) {
 
@@ -38,6 +44,12 @@ public class QuadraController {
         }
     }
 
+    /**
+     * Deleta objeto quadra do banco
+     *
+     * @param id
+     * @return ok ou error
+     */
     @DeleteMapping
     public ResponseEntity deletarQuadra(@RequestParam Long id){
         try{
@@ -48,6 +60,10 @@ public class QuadraController {
         }
     }
 
+    /**
+     * Retorna todas as quadras cadastradas na aplicação
+     * @return List<Quadra>
+     */
     @GetMapping("/todas")
     public ResponseEntity obterQuadras(){
 
@@ -58,6 +74,12 @@ public class QuadraController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    /**
+     * Obtém uma quadra a partir do id
+     * @param idQuadra
+     * @return quadra
+     */
 
     @GetMapping("/{id}")
     public ResponseEntity obterQuadra(@PathVariable("id") Long idQuadra) {

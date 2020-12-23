@@ -21,6 +21,11 @@ public class UsuarioController {
     @Autowired
     UsuarioService usrService;
 
+    /**
+     * Adiciona usuário ao banco de dados
+     * @param dto
+     * @return 200 (sucesso) ou error
+     */
     @PostMapping
     public ResponseEntity salvarUsuario(@RequestBody UsuarioDTO dto) {
         // builda um novo usuario a partir dos dados do DTO
@@ -41,6 +46,12 @@ public class UsuarioController {
         }    
     }
 
+    /**
+     * Recebe um usuário e faz a validação do seu usuário e senha
+     *
+     * @param dto
+     * @return
+     */
     @PostMapping("/autenticar")
     public ResponseEntity autenticarUsuario(@RequestBody LoginDTO dto) {
         try {
@@ -51,6 +62,12 @@ public class UsuarioController {
         }
     }
 
+    /**
+     * Exclui um usuário a partir do email
+     *
+     * @param email
+     * @return
+     */
     @DeleteMapping
     public ResponseEntity deletarUsuario(@RequestParam String email){
         try{

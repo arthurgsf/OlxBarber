@@ -19,6 +19,12 @@ public class ReservaController {
     @Autowired
     ReservaService reservaService;
 
+    /**
+     * Cria uma reserva a uma quadra relacionando uma data e horário escolhido pelo usuário
+     * com uma quadra e seu horario de funcionamento
+     * @param dto
+     * @return ok ou error
+     */
     @PostMapping
     public ResponseEntity salvarReserva(@RequestBody ReservaDTO dto) {
 
