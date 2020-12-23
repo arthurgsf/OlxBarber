@@ -1,7 +1,9 @@
-package com.arthurgsf.oqb;
+package com.arthurgsf.oqb.model;
 
 import com.arthurgsf.oqb.model.entity.Usuario;
 import com.arthurgsf.oqb.model.repo.UsuarioRepository;
+
+import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -19,9 +21,10 @@ public class UsuarioRepositoryTest {
     @Test
     public void verificarSalvarUsuario(){
         //cenário
-        Usuario user = Usuario.builder().nome("Teste").telefone("98989898")
-        .email("teste@teste.com")
-        .senha("123").build();
+        Usuario user = Usuario.builder().nome("Teste")
+                                        .telefone("98989898")
+                                        .email("teste@teste.com")
+                                        .senha("123").build();
 
         //ação
         Usuario salvo = repo.save(user);  //salva?
@@ -29,8 +32,26 @@ public class UsuarioRepositoryTest {
         //verificação
         Assertions.assertNotNull(salvo);
         Assertions.assertEquals(user.getNome(), salvo.getNome());
+        Assertions.assertEquals(user.getTelefone(), salvo.getTelefone());
         Assertions.assertEquals(user.getEmail(), salvo.getEmail());
         Assertions.assertEquals(user.getSenha(), salvo.getSenha());
-        Assertions.assertEquals(user.getNome(), salvo.getNome());
+    }
+
+    @Test
+    public void verificarDeletarUsuario(){
+        //cenário
+        Usuario user = Usuario.builder().nome("Teste")
+                                        .telefone("98989898")
+                                        .email("teste@teste.com")
+                                        .senha("123").build();
+
+        //ação
+        Usuario salvo = repo.save(user);  //salva
+        Long id = salvo.getId();
+        repo.deleteById(salvo.getId());
+
+        //verificação
+        Optional<Usuario> temp = repo.findById(id);
+        Assertions.assertFalse(temp.isPresent());
     }
 }
